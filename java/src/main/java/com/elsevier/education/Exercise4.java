@@ -4,6 +4,9 @@ package com.elsevier.education;
 
 TODO Is Counter thread-safe? If so, why, and if not, how can we fix it?
 
+If 2 threads are calling increment() and resetCount() at the same time,
+it will lead to inconsistent counter value.
+To fix this, we can make the methods synchronized.
 */
 public class Exercise4 {
 
@@ -11,7 +14,7 @@ public class Exercise4 {
 		
 		private int count = 0;
 		
-		public int increment() {
+		public synchronized int increment() {
 			return ++count;
 		}
 		
@@ -19,9 +22,11 @@ public class Exercise4 {
 			return count;
 		}
 		
-		public void resetCount() {
+		public synchronized void resetCount() {
 			count = 0;
 		}
 
 	}
+	
+	
 }
